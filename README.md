@@ -172,57 +172,69 @@ Now create a new admin called "jane_admin" and uncheck "User must change passwor
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png"/>
+<img src="https://i.imgur.com/GF10K7x.png"/>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Now add Jane to Domain Admin, to do that right click on jane -> Properties -> Member Of -> Add -> type "Domain" in the object box -> Check Names -> Domain Admins -> hit OK and then apply.
+  
+After you add Jane to the domain admins security group, logout and logon to DC-1 as jane_admin.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png"/>
+<img src="https://i.imgur.com/8OmbFP9.png"/>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Now set Client-1's DNS server to the private IP of DC-1, in the case of mine it was 10.0.0.4.
+  
+To do that, on the Azure portal go into Client-1's networking and click on the NIC, go into DNS servers and add the private IP of DC-1 into the DNS srver list, and then hit save. After that you will need to restart Client-1 from the Azure portal and logon to it as the original user set for that VM.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png"/>
+<img src="https://i.imgur.com/I8Zp3vV.png"/>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+After you log back into Client-1, go to Settings -> About -> Rename this PC -> change domain -> set it as mydomain.com -> and then use mydomain.com\jane_admin to make the changes. The VM will now restart.
+  
+After it restarts logon to Client-1 with MYDOMIAN\jane_admin instead (mydomain.com\jane_admin won't work since by default Client-1 will consider MYDOMAIN as the actual name of the domain. 
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png"/>
+<img src="https://i.imgur.com/WmJykFi.png"/>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Now in Client-1 go to remote desktop settings and allow all domain users to connect to Client-1. To do this click on Select users that can remotely access this PC -> Add -> type "domain users" in the object box -> Check names -> hit OK.
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/3UaY6jj.png"/>
+</p>
+<p>
+Then in DC-1 go back to Active Directory Users and Computers and ensure Client-1 is listed.
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/1SQwwYX.png"/>
+</p>
+<p>
+In DC-1 open up powershell ise as admin.
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/iGLgdDi.png"/>
+</p>
+<p>
+Now copy the powershell script linked below, hit the new script icon, paste in the script, and then hit the green run button. This script will create 10,000 users with randomly generated names inside the domain, you can change that number if you would like to, it doesn't matter.
+
+- [Script](https://github.com/joshmadakor1/AD_PS/blob/master/Generate-Names-Create-Users.ps1)
+
+Now you can chose any of those usernames to sign into Cleint-1, the password will be "Password1" as that is what powershell script set them as and you can play around with the script and change it if you would like to. 
+  
+Congrats! That is the end of this lab, hopefully you had fun and learned a thing or two, because I sure did!
 </p>
 <br />
