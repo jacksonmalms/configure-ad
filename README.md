@@ -3,7 +3,7 @@
 </p>
 
 <h1>On-premises Active Directory Deployed in Azure</h1>
-This tutorial/lab outlines the implementation of on-premises Active Directory within Azure Virtual Machines. If you havent seen my prerequisite tutorials first, go ahead and check them first and come back here afterwards, as this lab builds on those ones.<br />
+This tutorial/lab outlines the implementation of on-premises Active Directory within Azure Virtual Machines. If you haven't seen my prerequisite tutorials first, go ahead and check them first and come back here afterwards, as this lab builds on those ones.<br />
 
 <h2>Prerequisites</h2>
 
@@ -95,7 +95,7 @@ Now log into DC-1 and open Windows Defender Firewall with Advanced Security.
 <img src="https://i.imgur.com/wJhlDGy.png"/>
 </p>
 <p>
-Now go into inbound rules and enable all ICMPv4 traffic, this is thr protocol that the ping command uses.
+Now go into inbound rules and enable all ICMPv4 traffic, this is the protocol that the ping command uses.
 </p>
 <br />
 
@@ -103,7 +103,7 @@ Now go into inbound rules and enable all ICMPv4 traffic, this is thr protocol th
 <img src="https://i.imgur.com/Ig6FsqZ.jpg"/>
 </p>
 <p>
-Go back into Client-1 and notice that we are now getting replies back from DC-1 with the ping -t command. (FYI if you hit Ctrl + C in command prompt it will stop whatever command that is currently being exceuted)
+Go back into Client-1 and notice that we are now getting replies back from DC-1 with the ping -t command. (FYI if you hit Ctrl + C in command prompt it will stop whatever command that is currently being executed)
 </p>
 <br />
 
@@ -187,7 +187,7 @@ After you add Jane to the domain admins security group, logout and logon to DC-1
 <p>
 Now set Client-1's DNS server to the private IP of DC-1, in the case of mine it was 10.0.0.4.
   
-To do that, on the Azure portal go into Client-1's networking and click on the NIC, go into DNS servers and add the private IP of DC-1 into the DNS srver list, and then hit save. After that you will need to restart Client-1 from the Azure portal and logon to it as the original user set for that VM.
+To do that, on the Azure portal go into Client-1's networking and click on the NIC, go into DNS servers and add the private IP of DC-1 into the DNS server list, and then hit save. After that you will need to restart Client-1 from the Azure portal and logon to it as the original user set for that VM.
 </p>
 <br />
 
@@ -233,7 +233,7 @@ Now copy the powershell script linked below, hit the new script icon, paste in t
 
 - [Script](https://github.com/joshmadakor1/AD_PS/blob/master/Generate-Names-Create-Users.ps1)
 
-Now you can chose any of those usernames to sign into Cleint-1, the password will be "Password1" as that is what powershell script set them as and you can play around with the script and change it if you would like to. 
+Now you can chose any of those usernames to sign into Client-1, the password will be "Password1" as that is what powershell script set them as and you can play around with the script and change it if you would like to. 
   
 Congrats! That is the end of this lab, hopefully you had fun and learned a thing or two, because I sure did!
 </p>
